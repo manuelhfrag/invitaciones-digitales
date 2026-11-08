@@ -243,6 +243,15 @@ footer a{color:var(--brand)}
   </div>
 </section>
 
+<section id="tests" style="display:none;padding:20px 0 90px">
+  <div class="wrap"><div class="need"><b>Prueba temporal:</b> toca cada botón desde Pinterest y dime cuál abre WhatsApp directo.
+    <div style="display:flex;flex-direction:column;gap:10px;margin-top:14px">
+      <a class="btn btn-line" href="https://wa.me/523335822737?text=Hola%2C%20me%20interesa%20una%20invitaci%C3%B3n%20digital.%0A%0ADise%C3%B1o%20que%20me%20gust%C3%B3%3A%20%0ATipo%3A%20imagen%20%2F%20video%0AFecha%20del%20evento%3A%20%0APa%C3%ADs%3A%20">Prueba A (misma ventana)</a>
+      <a class="btn btn-line" href="https://api.whatsapp.com/send?phone=523335822737&text=Hola%2C%20me%20interesa%20una%20invitaci%C3%B3n%20digital.%0A%0ADise%C3%B1o%20que%20me%20gust%C3%B3%3A%20%0ATipo%3A%20imagen%20%2F%20video%0AFecha%20del%20evento%3A%20%0APa%C3%ADs%3A%20">Prueba B (api.whatsapp.com)</a>
+      <a class="btn btn-line" href="whatsapp://send?phone=523335822737&text=Hola%2C%20me%20interesa%20una%20invitaci%C3%B3n%20digital.%0A%0ADise%C3%B1o%20que%20me%20gust%C3%B3%3A%20%0ATipo%3A%20imagen%20%2F%20video%0AFecha%20del%20evento%3A%20%0APa%C3%ADs%3A%20">Prueba C (app de WhatsApp)</a>
+    </div></div></div>
+</section>
+
 <div class="float"><a class="btn btn-wa" href="https://wa.me/523335822737?text=Hola%2C%20me%20interesa%20una%20invitaci%C3%B3n%20digital.%0A%0ADise%C3%B1o%20que%20me%20gust%C3%B3%3A%20%0ATipo%3A%20imagen%20%2F%20video%0AFecha%20del%20evento%3A%20%0APa%C3%ADs%3A%20" target="_blank" rel="noopener" data-wa data-src="flotante">💬 Pedir mi invitación por WhatsApp</a></div>
 
 <script>
@@ -250,7 +259,7 @@ footer a{color:var(--brand)}
   var $=function(id){return document.getElementById(id)};
   var PRETTY="+52 33 3582 2737";
   var ua=navigator.userAgent||"";
-  if(/Pinterest|FBAN|FBAV|Instagram|Line\//i.test(ua)||(/iPhone|iPad|iPod/i.test(ua)&&!/Safari/i.test(ua))){var ia=$("inapp");if(ia)ia.classList.add("on")}
+  if(/Pinterest|FBAN|FBAV|Instagram|Line\//i.test(ua)||(/iPhone|iPad|iPod/i.test(ua)&&!/Safari/i.test(ua))){var ia=$("inapp");if(ia)ia.classList.add("on");var ts=$("tests");if(ts)ts.style.display="block"}
   // seguimiento: cada clic en WhatsApp cuenta como lead en Pinterest (no cambia el enlace)
   document.querySelectorAll("[data-wa]").forEach(function(a){
     a.addEventListener("click",function(){
