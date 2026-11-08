@@ -138,14 +138,14 @@ footer a{color:var(--brand)}
 </head>
 <body>
 
-<div class="inapp" id="inapp">Si el botón de WhatsApp no abre, toca los tres puntos (⋯) y elige <b>«Abrir en el navegador»</b>, o escríbeme al <b>+52 33 3582 2737</b>.</div>
+<div class="inapp" id="inapp">Si WhatsApp no abre desde aquí, toca los tres puntos (⋯) y elige <b>«Abrir en el navegador»</b>, o escríbeme al <b>+52 33 3582 2737</b>.</div>
 <header class="hero">
   <div class="wrap">
     <span class="tag">🎉 Entrega en 1 a 3 días</span>
     <h1>Invitaciones digitales para tu fiesta, <em>listas en 1 a 3 días</em></h1>
     <p class="lead">Elige tu diseño, mándame el nombre, la fecha y el lugar, y recibe tu invitación en imagen o video para compartir por WhatsApp.</p>
     <div class="row">
-      <a class="btn btn-wa" href="#" data-wa data-src="hero">💬 Pedir mi invitación</a>
+      <a class="btn btn-wa" href="https://wa.me/523335822737?text=Hola%2C%20me%20interesa%20una%20invitaci%C3%B3n%20digital.%0A%0ADise%C3%B1o%20que%20me%20gust%C3%B3%3A%20%0ATipo%3A%20imagen%20%2F%20video%0AFecha%20del%20evento%3A%20%0APa%C3%ADs%3A%20" target="_blank" rel="noopener" data-wa data-src="hero">💬 Pedir mi invitación</a>
       <a class="btn btn-ghost" href="#precios">Ver precios</a>
     </div>
     <ul>
@@ -236,37 +236,32 @@ footer a{color:var(--brand)}
     <div class="final">
       <h2>¿Lista para tu invitación?</h2>
       <p>Escríbeme y empezamos con tu diseño.</p>
-      <a class="btn btn-wa" href="#" data-wa data-src="final">💬 Escribir por WhatsApp</a>
-      <p class="alt">¿No abre? Escríbeme al <b>+52 33 3582 2737</b> <button class="copy" type="button" id="copynum">Copiar número</button><br><a href="#" id="wascheme">Abrir directo en la app de WhatsApp</a></p>
+      <a class="btn btn-wa" href="https://wa.me/523335822737?text=Hola%2C%20me%20interesa%20una%20invitaci%C3%B3n%20digital.%0A%0ADise%C3%B1o%20que%20me%20gust%C3%B3%3A%20%0ATipo%3A%20imagen%20%2F%20video%0AFecha%20del%20evento%3A%20%0APa%C3%ADs%3A%20" target="_blank" rel="noopener" data-wa data-src="final">💬 Escribir por WhatsApp</a>
+      <p class="alt">¿No abre? Escríbeme al <b>+52 33 3582 2737</b> <button class="copy" type="button" id="copynum">Copiar número</button></p>
     </div>
     <footer>Invitaciones digitales · Atención por WhatsApp · <a href="https://mx.pinterest.com/manuelhfrag/?utm_source=landing&utm_medium=footer" target="_blank" rel="noopener">Pinterest</a></footer>
   </div>
 </section>
 
-<div class="float"><a class="btn btn-wa" href="#" data-wa data-src="flotante">💬 Pedir mi invitación por WhatsApp</a></div>
+<div class="float"><a class="btn btn-wa" href="https://wa.me/523335822737?text=Hola%2C%20me%20interesa%20una%20invitaci%C3%B3n%20digital.%0A%0ADise%C3%B1o%20que%20me%20gust%C3%B3%3A%20%0ATipo%3A%20imagen%20%2F%20video%0AFecha%20del%20evento%3A%20%0APa%C3%ADs%3A%20" target="_blank" rel="noopener" data-wa data-src="flotante">💬 Pedir mi invitación por WhatsApp</a></div>
 
 <script>
 (function(){
-  var NUM="523335822737";
-  var msg="Hola, me interesa una invitación digital.\n\nDiseño que me gustó: \nTipo: imagen / video\nFecha del evento: \nPaís: ";
-  var qs=new URLSearchParams(location.search);
-  var src=qs.get("utm_source");
-  if(src){msg+="\n(Vengo de: "+src+")"}
-  var url="https://wa.me/"+NUM+"?text="+encodeURIComponent(msg);
-  var scheme="whatsapp://send?phone="+NUM+"&text="+encodeURIComponent(msg);
-  var ws=document.getElementById("wascheme"); if(ws) ws.href=scheme;
-  if(/Pinterest|FBAN|FBAV|Instagram|Line\/|; wv\)/i.test(navigator.userAgent)){var ia=document.getElementById("inapp"); if(ia) ia.classList.add("on");}
-  var cb=document.getElementById("copynum");
-  if(cb) cb.addEventListener("click",function(){
-    var t="+52 33 3582 2737";
-    function ok(){cb.textContent="¡Copiado!";setTimeout(function(){cb.textContent="Copiar número"},2000)}
-    try{ if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(ok,function(){})} else {var i=document.createElement("input");i.value=t;document.body.appendChild(i);i.select();document.execCommand("copy");document.body.removeChild(i);ok()} }catch(e){}
-  });
+  var $=function(id){return document.getElementById(id)};
+  var PRETTY="+52 33 3582 2737";
+  var ua=navigator.userAgent||"";
+  if(/Pinterest|FBAN|FBAV|Instagram|Line\//i.test(ua)||(/iPhone|iPad|iPod/i.test(ua)&&!/Safari/i.test(ua))){var ia=$("inapp");if(ia)ia.classList.add("on")}
+  // seguimiento: cada clic en WhatsApp cuenta como lead en Pinterest (no cambia el enlace)
   document.querySelectorAll("[data-wa]").forEach(function(a){
-    a.href=url;a.target="_blank";a.rel="noopener";
     a.addEventListener("click",function(){
-      try{ if(window.pintrk){ pintrk("track","lead",{lead_type:"whatsapp_"+a.dataset.src}); } }catch(e){}
+      try{if(window.pintrk){pintrk("track","lead",{lead_type:"whatsapp_"+a.dataset.src})}}catch(x){}
     });
+  });
+  var cn=$("copynum");
+  if(cn)cn.addEventListener("click",function(){
+    function ok(){cn.textContent="¡Copiado!";setTimeout(function(){cn.textContent="Copiar número"},2000)}
+    function fb(){try{var t=document.createElement("textarea");t.value=PRETTY;t.style.position="fixed";t.style.opacity="0";document.body.appendChild(t);t.focus();t.select();t.setSelectionRange(0,99999);document.execCommand("copy");document.body.removeChild(t);ok()}catch(e){}}
+    try{if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(PRETTY).then(ok,fb)}else{fb()}}catch(e){fb()}
   });
 })();
 </script>
