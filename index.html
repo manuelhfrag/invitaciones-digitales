@@ -130,6 +130,18 @@ footer a{color:var(--brand)}
 .alt{margin-top:16px;font-size:.92rem;opacity:.95}
 .alt a{color:#fff;font-weight:700}
 .copy{margin-left:6px;background:rgba(255,255,255,.18);color:#fff;border:1px solid rgba(255,255,255,.5);border-radius:10px;padding:6px 12px;font-weight:700;font-size:.85rem;cursor:pointer}
+/* PROMO BUEN FIN */
+.promo{display:none;background:linear-gradient(90deg,#d6246e,#ff6f3c);color:#fff;text-align:center;padding:11px 16px;font-size:.95rem;line-height:1.35;font-weight:600}
+.promo.on{display:block}
+.promo b{font-weight:900}
+.price{text-align:right}
+.price .was{display:none;font-size:.9rem;font-weight:700;color:var(--muted);text-decoration:line-through;line-height:1}
+.price .amt{font-style:normal}
+.promo-on .price.mx .was{display:block}
+.promo-on .price.mx .amt{color:#d6246e}
+.mxnote{display:none;margin-top:14px;font-size:.88rem;font-weight:700;color:#d6246e}
+.promo-on .mxnote{display:block}
+@media (prefers-color-scheme:dark){.promo-on .price.mx .amt,.mxnote{color:#ff8fb3}}
 /* BOTON FLOTANTE */
 .float{position:fixed;left:0;right:0;bottom:0;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:linear-gradient(to top,var(--bg) 60%,transparent);z-index:20;pointer-events:none}
 .float .btn{width:100%;max-width:520px;margin:0 auto;display:flex;pointer-events:auto}
@@ -138,6 +150,7 @@ footer a{color:var(--brand)}
 </head>
 <body>
 
+<div class="promo" id="promo">🔥 <b>Buen Fin:</b> 20% de descuento en México · del 13 al 17 de noviembre</div>
 <header class="hero">
   <div class="wrap">
     <span class="tag">🎉 Entrega en 1 a 3 días</span>
@@ -163,8 +176,9 @@ footer a{color:var(--brand)}
       <div class="pcard">
         <h3>🇲🇽 México</h3>
         <p class="where">Pago en pesos mexicanos</p>
-        <div class="opt"><div><b>Invitación en imagen</b><small>Diseño digital (JPG/PNG)</small></div><div class="price">$100<span>MXN</span></div></div>
-        <div class="opt"><div><b>Invitación en video<span class="badge">Más pedida</span></b><small>Animada, con música</small></div><div class="price">$150<span>MXN</span></div></div>
+        <div class="opt"><div><b>Invitación en imagen</b><small>Diseño digital (JPG/PNG)</small></div><div class="price mx"><span class="was">$100</span><em class="amt" data-n="$100" data-p="$80">$100</em><span>MXN</span></div></div>
+        <div class="opt"><div><b>Invitación en video<span class="badge">Más pedida</span></b><small>Animada, con música</small></div><div class="price mx"><span class="was">$150</span><em class="amt" data-n="$150" data-p="$120">$150</em><span>MXN</span></div></div>
+        <p class="mxnote">🔥 Precio Buen Fin, solo del 13 al 17 de noviembre de 2026.</p>
       </div>
       <div class="pcard">
         <h3>🌎 Otros países</h3>
@@ -249,6 +263,19 @@ footer a{color:var(--brand)}
 <script>
 (function(){
   var $=function(id){return document.getElementById(id)};
+  // Promo Buen Fin 2026 (México): del viernes 13 al martes 17 de noviembre, hora del centro de México.
+  // Se activa y se apaga sola. Para verla antes en pruebas, agrega ?buenfin=1 al enlace.
+  var BF_START=Date.parse("2026-11-13T00:00:00-06:00"), BF_END=Date.parse("2026-11-18T00:00:00-06:00");
+  var now=Date.now();
+  var promo=/[?&]buenfin=1/.test(location.search)||(now>=BF_START&&now<BF_END);
+  if(promo){
+    document.documentElement.classList.add("promo-on");
+    var pb=$("promo"); if(pb) pb.classList.add("on");
+    document.querySelectorAll(".amt").forEach(function(e){e.textContent=e.getAttribute("data-p")});
+    var base="Hola, me interesa una invitación digital (vi la promo del Buen Fin).\n\nDiseño que me gustó: \nTipo: imagen / video\nFecha del evento: \nPaís: ";
+    var link="https://wa.me/523335822737?text="+encodeURIComponent(base);
+    document.querySelectorAll("[data-wa]").forEach(function(x){x.href=link});
+  }
   var PRETTY="+52 33 3582 2737";
   // seguimiento: cada clic en WhatsApp cuenta como lead en Pinterest (no cambia el enlace)
   document.querySelectorAll("[data-wa]").forEach(function(a){
